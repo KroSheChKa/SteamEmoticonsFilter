@@ -21,7 +21,7 @@ To do this, I use [steam.tools](https://steam.tools/mosaticon/) to get a string 
 ## How to launch
 
 A few steps:
-- Make sure you have installed [python](https://www.python.org/downloads/)
+- Make sure you have installed [python 3.X](https://www.python.org/downloads/) (Better to download 3.10)
 - Clone this project by command below or you can just download it as **.zip**:
 ```
 git clone https://github.com/KroSheChKa/SteamEmoticonsFilter.git
@@ -31,10 +31,14 @@ git clone https://github.com/KroSheChKa/SteamEmoticonsFilter.git
 ```
 pip install numpy
 ```
-- There are 2 files you need to modify in `Text Files` folder:
+- There are **2 files** you need to **modify** in `Text Files` folder:
   
   - In `Emoticons.txt` paste string from [steam.tools](https://steam.tools/mosaticon/) in **one line** (Here will be Steam guide in future)
-  - In `BlackList` add emoticons that you don't want to see in result string (also paste in **one line**)
+  - In `BlackList` add emoticons that you don't want to see in result string (also paste in **one line** without spaces) like this:
+
+    ```
+    :example::example1::example2::ect_examples:
+    ```
 
 - The final step. Just double-click on the `SEF.py` and **copy** the result string in the `Results.txt` file :)
 
