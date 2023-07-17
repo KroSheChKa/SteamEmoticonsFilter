@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 
 # Read emoticons and black list as strings
 with open('Text Files\Emoticons.txt', "r") as emoticons:
@@ -25,6 +26,18 @@ emoticons_line_splitted = [emoticons_line_splitted[index] for index in sorted(in
 # Assemble all the emotcions back into one line
 emoticons_done = ':' + ('::').join(emoticons_line_splitted) + ':'
 
+# 8000 is the character limit for the Steam showcase
+if len(emoticons_done) > 8000:
+    print(f'You have exceeded the character limit for the Steam showcase. 8000 < {len(emoticons_done)}')
+    while True:
+        user_inp = input('Write it to a file anyway? Y/N')
+        if user_inp.upper() == 'N':
+            sys.exit()
+        elif user_inp.upper() == 'Y':
+            break
+        else:
+            continue
+        
 # Write the result in the file
 with open("Text Files\Result.txt", "w") as result:
     result.write(emoticons_done)
