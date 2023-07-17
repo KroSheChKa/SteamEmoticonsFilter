@@ -1,5 +1,7 @@
 import numpy as np
 import sys
+import tkinter as tk
+from tkinter import messagebox
 
 # Read emoticons and black list as strings
 with open('Text Files\Emoticons.txt', "r") as emoticons:
@@ -28,15 +30,17 @@ emoticons_done = ':' + ('::').join(emoticons_line_splitted) + ':'
 
 # 8000 is the character limit for the Steam showcase
 if len(emoticons_done) > 8000:
-    print(f'You have exceeded the character limit for the Steam showcase. 8000 < {len(emoticons_done)}')
     while True:
-        user_inp = input('Write it to a file anyway? Y/N')
-        if user_inp.upper() == 'N':
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showinfo("Warning", f"You have exceeded the character limit for the Steam showcase \n8000 < {len(emoticons_done)}")
+
+        user_inp = messagebox.askyesno("Confirmation", "Write it to a file anyway?")
+
+        if user_inp == False:
             sys.exit()
-        elif user_inp.upper() == 'Y':
+        elif user_inp == True:
             break
-        else:
-            continue
         
 # Write the result in the file
 with open("Text Files\Result.txt", "w") as result:
