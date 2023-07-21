@@ -47,7 +47,7 @@ if len(emoticons_done) > 8000:
             sys.exit()
         elif user_inp == True:
             break
-        
+
 # Write the result in the file
 with open("Text Files\Result.txt", "w") as result:
     result.write(emoticons_done)
