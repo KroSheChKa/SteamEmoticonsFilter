@@ -3,30 +3,36 @@ import sys
 import tkinter as tk
 from tkinter import messagebox
 
+# Read the lines in file that do not starts with # or empty
+def get_line(file_path):
+    
+    with open(file_path, 'r') as file:
+        for line in file:
+            line = line.strip()
+            if len(line) != 0 and not line.startswith('#'):
+                # Remove 1st and last symbol and split each string
+                return line[1:-1].split('::')
+
+# Trying to find a black-listed and if so delete + unique
+def clean_up(emoticons, black_list):
+    step = 0
+    while step < len(emoticons):
+        if emoticons[step] in black_list:
+            del emoticons[step]
+        else:
+            step += 1
+    # Delete the non-unique
+    indexes = np.unique(emoticons, return_index = True)[1]
+    return [emoticons[index] for index in sorted(indexes)]
+
 # Read emoticons and black list as strings
-with open('Text Files\Emoticons.txt', "r") as emoticons:
-    emoticons_line = emoticons.readline()[1:-1]
-with open('Text Files\BlackList.txt', "r") as emoticons_blcklst:
-    emoticons_black_list = emoticons_blcklst.readline()[1:-1]
+emoticons_line_splitted = get_line(r'Text Files\Emoticons.txt')
+emoticons_black_list_splitted = get_line(r'Text Files\BlackList.txt')
 
-# Split each string
-emoticons_line_splitted = emoticons_line.split('::')
-emoticons_black_list_splitted = emoticons_black_list.split('::')
-
-# Trying to find a black-listed and if so delete
-step = 0
-while step < len(emoticons_line_splitted):
-    if emoticons_line_splitted[step] in emoticons_black_list_splitted:
-        del emoticons_line_splitted[step]
-    else:
-        step += 1
-
-# Here is method of creating unique list without sorting it
-indexes = np.unique(emoticons_line_splitted, return_index = True)[1]
-emoticons_line_splitted = [emoticons_line_splitted[index] for index in sorted(indexes)]
+emoticons_list = clean_up(emoticons_line_splitted, emoticons_black_list_splitted)
 
 # Assemble all the emotcions back into one line
-emoticons_done = ':' + ('::').join(emoticons_line_splitted) + ':'
+emoticons_done = ':' + ('::').join(emoticons_list) + ':'
 
 # 8000 is the character limit for the Steam showcase
 if len(emoticons_done) > 8000:
