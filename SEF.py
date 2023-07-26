@@ -3,9 +3,17 @@ import sys
 import tkinter as tk
 from tkinter import messagebox
 
+# Message box
+def message_box(msg, title = "Warning", stop = False):
+    root = tk.Tk()
+    root.withdraw()
+    messagebox.showinfo(title, msg)
+    if stop:
+        sys.exit()
+
 # Read the lines in file that do not starts with # or empty
 def get_line(file_path):
-    
+
     with open(file_path, 'r') as file:
         for line in file:
             line = line.strip()
@@ -21,33 +29,70 @@ def clean_up(emoticons, black_list):
             del emoticons[step]
         else:
             step += 1
-    # Delete the non-unique
+    # Delete the not unique ones
     indexes = np.unique(emoticons, return_index = True)[1]
     return [emoticons[index] for index in sorted(indexes)]
 
-# Read emoticons and black list as strings
-emoticons_line_splitted = get_line(r'Text Files\Emoticons.txt')
-emoticons_black_list_splitted = get_line(r'Text Files\BlackList.txt')
+# Func. to split into multiple showcases
+def showcase_split(emoticons, count, em_type):
+    s = []
+    part = round(len(emoticons) / count)
+    print(part, len(emoticons), count)
+    if em_type:
+        for i in range(count):
+            start = part * i
+            end = part * (i + 1) - 1 + len(emoticons) % part
+            s.append(emoticons[start:end])
+    elif not em_type: # 8000
+        pass
+    else:
+        message_box(msg = "Check the value of split_type. It should be 0 or 1", stop = True)
 
-emoticons_list = clean_up(emoticons_line_splitted, emoticons_black_list_splitted)
+    return s
 
-# Assemble all the emotcions back into one line
-emoticons_done = ':' + ('::').join(emoticons_list) + ':'
+def main():
 
-# 8000 is the character limit for the Steam showcase
-if len(emoticons_done) > 8000:
-    while True:
-        root = tk.Tk()
-        root.withdraw()
-        messagebox.showinfo("Warning", f"You have exceeded the character limit for the Steam showcase \n8000 < {len(emoticons_done)}")
+    # Values to manage
+    showcase_count = 2 # Split into x showcases | 1/x
+    split_type = 1 # How the string should 'fill' showcases | 0/1
+    invert_emoticons = 1 # -1 invert | 1 keep unchanged
 
-        user_inp = messagebox.askyesno("Confirmation", "Write it to a file anyway?")
+    # Read emoticons and black list as strings
+    emoticons_line_splitted = get_line(r'Text Files\Emoticons.txt')
+    emoticons_black_list_splitted = get_line(r'Text Files\BlackList.txt')
+    
+    # Trying to catch incorrect string recognition
+    if emoticons_black_list_splitted == None:
+        message_box(msg = "Incorrect string recognition in BlackList.txt", stop = True)
+    elif emoticons_line_splitted == None:
+       message_box(msg = "Incorrect string recognition in Emoticons.txt", stop = True)
+    else:
+        emoticons_list = clean_up(emoticons_line_splitted, emoticons_black_list_splitted)
 
-        if user_inp == False:
-            sys.exit()
-        elif user_inp == True:
-            break
+    # Split into multiple showcases
+    emoticons_split_done = showcase_split(emoticons_list[::invert_emoticons], showcase_count, split_type)
 
-# Write the result in the file
-with open("Text Files\Result.txt", "w") as result:
-    result.write(emoticons_done)
+    # Assemble all the emotcions back into line/lines
+    emoticons_done = [':' + ('::').join(i) + ':' for i in emoticons_split_done]
+
+    res = ''
+    # 8000 is the character limit for the Steam showcase
+    for i in emoticons_done:
+        if len(i) > 8000:
+            message_box(msg = f"You have exceeded the character limit for the Steam showcase \n8000 < {len(emoticons_done)}")
+
+            user_inp = messagebox.askyesno("Confirmation", "Write it to a file anyway?")
+
+            if user_inp == False:
+                sys.exit()
+            elif user_inp == True:
+                break
+        res += i + '\n\n'
+
+    # Write the result in the file
+    with open("Text Files\Result.txt", "w") as result:
+        result.write(res)
+    print(res)
+
+if __name__ == '__main__':
+    main()
