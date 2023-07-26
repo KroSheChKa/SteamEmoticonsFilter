@@ -1,0 +1,2 @@
+# Paste emoticons like that (without # in the begining):
+#:example::example1::example2::ect_examples:
