@@ -36,24 +36,24 @@ def clean_up(emoticons, black_list):
 # Func. to split into multiple showcases
 def showcase_split(emoticons, count, em_type):
     s = []
-    part = round(len(emoticons) / count)
-    print(part, len(emoticons), count)
-    if em_type:
+    if em_type == 1:
+        start = 0
         for i in range(count):
-            start = part * i
-            end = part * (i + 1) - 1 + len(emoticons) % part
+            end = round(len(emoticons) * (i + 1) / count) + 1
             s.append(emoticons[start:end])
-    elif not em_type: # 8000
+            start = end
+            # Assemble all the emotcions into lines
+            return [':' + ('::').join(i) + ':' for i in s]
+    elif em_type == 0:
         pass
     else:
         message_box(msg = "Check the value of split_type. It should be 0 or 1", stop = True)
-
     return s
 
 def main():
 
     # Values to manage
-    showcase_count = 2 # Split into x showcases | 1/x
+    showcase_count = 1 # Split emoticons into x showcases | 1/x
     split_type = 1 # How the string should 'fill' showcases | 0/1
     invert_emoticons = 1 # -1 invert | 1 keep unchanged
 
@@ -92,7 +92,7 @@ def main():
     # Write the result in the file
     with open("Text Files\Result.txt", "w") as result:
         result.write(res)
-    print(res)
+    #print(res)
 
 if __name__ == '__main__':
     main()
