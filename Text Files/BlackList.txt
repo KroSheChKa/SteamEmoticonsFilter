@@ -1,2 +1,2 @@
-# Paste emoticons like that (without # in the begining):
+# Paste emoticons (without # in the begining) that you want to delete like that:
 #:example::example1::example2::ect_examples:
