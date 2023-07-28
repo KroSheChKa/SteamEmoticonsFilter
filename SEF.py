@@ -42,12 +42,14 @@ def showcase_split(emoticons, count, em_type, chr_lim):
         while len(a) > chr_lim:
             pointer = chr_lim - 1
             while count != 1:
+
                 if a[pointer] == ':':
+
                     if a[pointer - 1] == ':':
                         s.append(a[:pointer])
                         a = a[pointer:]
                     else:
-                        s.append(a[:pointer+1])
+                        s.append(a[:pointer + 1])
                         a = a[pointer + 1:]
                     count -= 1
                     break
@@ -71,13 +73,13 @@ def showcase_split(emoticons, count, em_type, chr_lim):
 
 def main():
 
-    # Values to manage. link ()
-    invert_emoticons = -1 # -1 invert | 1 keep unchanged
+    # Values to manage https://github.com/KroSheChKa/SteamEmoticonsFilter/edit/main/README.md#setting-preferences
+    invert_emoticons = 1 # -1 invert | 1 keep unchanged
     showcase_count = 1 # Split emoticons into x showcases | 1/x
-    split_type = 0 # How the string should 'fill' showcases | 0/1
+    split_type = 1 # How the string should 'fill' showcases | 0/1
 
     # You can set the limit for max symbol/character in each showcase
-    character_limit = 8000 # Change it only if split_type = 0 | 8000 - default val.
+    character_limit = 8000 # x <= 8000 | Change it only if split_type = 0
 
     # Read emoticons and black list as strings
     emoticons_line_splitted = get_line(r'Text Files\Emoticons.txt')
