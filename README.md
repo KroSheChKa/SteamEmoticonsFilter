@@ -16,7 +16,6 @@ To do this, I use [steam.tools](https://steam.tools/mosaticon/) to get a string 
 **What the program can do:**
 - removes duplicates
 - removes blacklist emoticons
-- divide the emoticons in different ways by changing [this]() preferences
 - сhange the order of emoticons and distribute them to different number of showcases by changing [this](https://github.com/KroSheChKa/SteamEmoticonsFilter/edit/main/README.md#setting-preferences) preferences
 
 # Setting preferences
@@ -28,7 +27,7 @@ You can change them in the beginning of the main() function.
 
 ***showcase_count*** - Number of desired showcases. 
 
-***split_type*** - Different ways to spread the emoticons over the showcases.
+***split_type*** - Different types of distribution of emoticons in the storefront
 - `0` - Cuts the emoticons right under the ***character limit***.
   > **It may not fill all desired showcases**, as there might be *not enough* emoticons to completely *cover* all of them.
 - `1` - Distributes the emoticons equally among all showcases.
