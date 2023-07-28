@@ -29,12 +29,12 @@ You can change them in the beginning of the main() function.
 ***showcase_count*** - Number of desired showcases. 
 
 ***split_type*** - Different ways to spread the emoticons over the showcases.
-- `0` - Cuts the emoticons right under the limit.
+- `0` - Cuts the emoticons right under the ***character limit***.
   > **It may not fill all desired showcases**, as there might be *not enough* emoticons to completely *cover* all of them.
 - `1` - Distributes the emoticons equally among all showcases.
 
 
-***character_limit*** - Limitation oт the number of emoticons in one showcase. 8000 - default value.
+***character_limit*** - Limitation of the number of emoticons in one showcase. 8000 - default value.
 > Works only if `split_type = 0`
 
 # How to launch
