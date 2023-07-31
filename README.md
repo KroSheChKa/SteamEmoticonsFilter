@@ -5,20 +5,38 @@ A program that filters your emoticons in Steam
 
 I have **a lot of** Steam emoticons that I make a gradient out of and put in a showcase in my profile like this:
 
-![Emoticons](https://github.com/KroSheChKa/SteamEmoticonsFilter/assets/104899233/d2ea5fdd-2be2-4bdc-aca5-bfab1791c352)
+![image](https://github.com/KroSheChKa/SteamEmoticonsFilter/assets/104899233/8769114b-2938-44cc-a41e-e8ab313a2b28)
+
 > Emoticons were passed through the algorithm 
 
 To do this, I use [steam.tools](https://steam.tools/mosaticon/) to get a string of Hue-sorted emoticons (I can't say it's done in a cool way tho. **So I think I will add a new hue-sorting method in future commits**). But every time I *get new ones*/*sell some*, I have to do it all over again - removing the "terrible" emoticons from the string. I also have to remove duplicates manually.
 
 ----
 
-**So I just wrote a algorithm that:**
-
+**What the program can do:**
 - removes duplicates
 - removes blacklist emoticons
-> The order of emoticons laeves *non changed*
+- сhange the order of emoticons and distribute them to different number of showcases by changing [this](https://github.com/KroSheChKa/SteamEmoticonsFilter/edit/main/README.md#setting-preferences) preferences
 
-## How to launch
+# Setting preferences
+You can change them in the beginning of the main() function.
+
+***invert_emoticons*** - Inverts the order of emoticons no matter how you sort them.
+- `1` - keep unchanged
+- `-1` - invert emoticons
+
+***showcase_count*** - Number of desired showcases. 
+
+***split_type*** - Different types of distribution of emoticons in the storefront
+- `0` - Cuts the emoticons right under the ***character limit***.
+  > **It may not fill all desired showcases**, as there might be *not enough* emoticons to completely *cover* all of them.
+- `1` - Distributes the emoticons equally among all showcases.
+
+
+***character_limit*** - Limitation of the number of emoticons in one showcase. 8000 - default value.
+> Works only if `split_type = 0`
+
+# How to launch
 
 A few steps:
 - Make sure you have installed [python 3.X](https://www.python.org/downloads/) (Better to download 3.10)
