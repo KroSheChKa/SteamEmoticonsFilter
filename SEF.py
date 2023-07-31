@@ -42,9 +42,7 @@ def showcase_split(emoticons, count, em_type, chr_lim):
         while len(a) > chr_lim:
             pointer = chr_lim - 1
             while count != 1:
-
                 if a[pointer] == ':':
-
                     if a[pointer - 1] == ':':
                         s.append(a[:pointer])
                         a = a[pointer:]
@@ -76,15 +74,15 @@ def main():
     # Values to manage https://github.com/KroSheChKa/SteamEmoticonsFilter/edit/main/README.md#setting-preferences
     invert_emoticons = 1 # -1 invert | 1 keep unchanged
     showcase_count = 1 # Split emoticons into x showcases | 1/x
-    split_type = 1 # How the string should 'fill' showcases | 0/1
+    split_type = 0 # How the string should 'fill' showcases | 0 - As many as can fit. 1 - Evenly
 
-    # You can set the limit for max symbol/character in each showcase
+    # Sets the limit for max symbol/character in each showcase
     character_limit = 8000 # x <= 8000 | Change it only if split_type = 0
 
     # Read emoticons and black list as strings
     emoticons_line_splitted = get_line(r'Text Files\Emoticons.txt')
     emoticons_black_list_splitted = get_line(r'Text Files\BlackList.txt')
-    
+
     # Trying to catch incorrect string recognition
     if emoticons_black_list_splitted == None:
         message_box(msg = "Incorrect string recognition in BlackList.txt", stop = True)
@@ -103,11 +101,9 @@ def main():
     # 8000 is the character limit for the Steam showcase
     for i in emoticons_split_done:
         if len(i) > 8000:
-            message_box(msg = f"You have exceeded the character limit for the Steam showcase \n8000 < {len(emoticons_split_done)}")
-            
+            message_box(msg = f"You have exceeded the character limit for the Steam showcase \n8000 < {len(i)}. {i + 1} showcase")
             # Y/n 
             user_inp = messagebox.askyesno("Confirmation", "Write it to a file anyway?")
-
             # NO - quit. Yes - write.
             if user_inp == False:
                 sys.exit()
