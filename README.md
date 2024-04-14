@@ -5,7 +5,7 @@ A program that filters your emoticons in Steam
 
 I have **a lot of** Steam emoticons that I make a gradient out of and put in a showcase in my profile like this:
 
-![image](https://github.com/KroSheChKa/SteamEmoticonsFilter/assets/104899233/8769114b-2938-44cc-a41e-e8ab313a2b28)
+![image](https://github.com/KroSheChKa/SteamEmoticonsFilter/assets/104899233/f473e165-f50a-4024-92af-e5fe0884c698)
 
 > Emoticons were passed through the algorithm 
 
